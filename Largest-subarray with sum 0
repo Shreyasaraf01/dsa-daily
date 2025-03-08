@@ -12,7 +12,7 @@
             }
             else{
                 if(mpp.find(sum) != mpp.end()){
-                    maxi = max(maxi, i-mpp[sum]); //current index(i)-starting index
+                    maxi = max(maxi, i-mpp[sum]); //current index(i) - first index where this cumulative sum was previously found
                 }
                 else{
                     mpp[sum] = i;
