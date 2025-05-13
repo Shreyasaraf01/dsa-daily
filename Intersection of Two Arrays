@@ -1,0 +1,22 @@
+class Solution {
+public:
+    vector<int> intersection(vector<int>& nums1, vector<int>& nums2) {
+        // Step 1: Convert the first array into a set to remove duplicates
+        // Sets automatically remove duplicates and allow fast lookups
+        unordered_set<int> set1(nums1.begin(), nums1.end());
+        
+        // Step 2: Create another set to store the result (to avoid duplicates)
+        unordered_set<int> common_elements;
+        
+        // Step 3: Check each number in the second array
+        for (int num : nums2) {
+            // If the number exists in the first array's set
+            if (set1.count(num) > 0) {
+                // Add it to our result set (automatically handles duplicates)
+                common_elements.insert(num);
+            }
+        }// Step 4: Convert the result set back to a vector and return
+        return vector<int>(common_elements.begin(), common_elements.end());
+    }
+    
+};
