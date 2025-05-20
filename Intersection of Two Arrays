@@ -18,5 +18,4 @@ public:
         }// Step 4: Convert the result set back to a vector and return
         return vector<int>(common_elements.begin(), common_elements.end());
     }
-    
 };
