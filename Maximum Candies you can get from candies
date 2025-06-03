@@ -1,0 +1,67 @@
+class Solution {
+public:
+    int maxCandies(vector<int>& status, vector<int>& candies, vector<vector<int>>& keys, vector<vector<int>>& containedBoxes, vector<int>& initialBoxes) {
+        int n = status.size();
+    vector<bool> boxOwned(n, false);
+    vector<bool> boxOpened(n, false);
+    vector<bool> keyAvailable(n, false);
+
+    queue<int> q;
+    for (int box : initialBoxes) {
+        boxOwned[box] = true;
+        q.push(box);
+    }
+
+    int totalCandies = 0;
+    bool changed = true;
+
+    while (changed) {
+        changed = false;
+        int sz = q.size();
+
+        queue<int> nextQueue;
+
+        while (!q.empty()) {
+            int box = q.front();
+            q.pop();
+
+            // Can only open if we have the key or it is already open
+            if (status[box] == 1 || keyAvailable[box]) {
+                if (boxOpened[box]) continue;
+                boxOpened[box] = true;
+                changed = true;
+
+                totalCandies += candies[box];
+
+                // We get keys from this box
+                for (int k : keys[box]) {
+                    if (!keyAvailable[k]) {
+                        keyAvailable[k] = true;
+                        if (boxOwned[k] && !boxOpened[k]) {
+                            q.push(k); // New box to process
+                        }
+                    }
+                }
+
+                // We get new boxes from this box
+                for (int b : containedBoxes[box]) {
+                    if (!boxOwned[b]) {
+                        boxOwned[b] = true;
+                        q.push(b);
+                    } else if ((status[b] == 1 || keyAvailable[b]) && !boxOpened[b]) {
+                        q.push(b); // Re-try if conditions now allow it
+                    }
+                }
+            } else {
+                // Re-queue it for future if maybe we get its key later
+                nextQueue.push(box);
+            }
+        }
+
+        // Move requeued items back to q
+        swap(q, nextQueue);
+    }
+
+    return totalCandies;
+    }
+};
