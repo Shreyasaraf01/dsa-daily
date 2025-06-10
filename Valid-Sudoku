@@ -1,4 +1,5 @@
 class Solution {
+
 public:
     bool isValidSudoku(vector<vector<char>>& board) {
         vector<unordered_set<char>> rows(9);
