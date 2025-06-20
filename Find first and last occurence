@@ -1,4 +1,5 @@
 class Solution {
+
 public:
     int lb(vector<int>& nums, int target) {
         int low = 0, high = nums.size() - 1;
