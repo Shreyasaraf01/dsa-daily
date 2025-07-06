@@ -1,33 +1,32 @@
 class Solution {
 public:
-    bool canWePlace(vector<int> &stalls, int dist, int cows) {
-        int n = stalls.size(); // size of array
-        int cntCows = 1;       // first cow placed
-        int last = stalls[0];  // position of last placed cow
-        for (int i = 1; i < n; i++) {
-            if (stalls[i] - last >= dist) {
-                cntCows++;           // place next cow
-                last = stalls[i];    // update last position
-            }
-            if (cntCows >= cows) return true;
+    bool canWePlace(vector<int> &nums, int dist, int k) {
+    int n = nums.size(); //size of array
+    int cntCows = 1; //no. of cows placed
+    int last = nums[0]; //position of last placed cow.
+    for (int i = 1; i < n; i++) {
+        if (nums[i] - last >= dist) {
+            cntCows++; //place next cow.
+            last = nums[i]; //update the last location.
         }
-        return false;
+        if (cntCows >= k) return true;
     }
+    return false;
+}
+    int aggressiveCows(vector<int> &nums, int k) {
+        int n = nums.size(); //size of array
+    //sort the stalls[]:
+    sort(nums.begin(), nums.end());
 
-    int aggressiveCows(vector<int> &stalls, int k) {
-        int n = stalls.size(); // size of array
-        sort(stalls.begin(), stalls.end()); // sort stalls
-
-        int low = 1, high = stalls[n - 1] - stalls[0];
-        // apply binary search
-        while (low <= high) {
-            int mid = (low + high) / 2;
-            if (canWePlace(stalls, mid, k)) {
-                low = mid + 1;
-            } else {
-                high = mid - 1;
-            }
+    int low = 1, high = nums[n - 1] - nums[0];
+    //apply binary search:
+    while (low <= high) {
+        int mid = (low + high) / 2;
+        if (canWePlace(nums, mid, k) == true) {
+            low = mid + 1;
         }
-        return high;
+        else high = mid - 1;
+    }
+    return high;
     }
 };
