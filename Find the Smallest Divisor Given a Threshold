@@ -1,4 +1,5 @@
 class Solution {
+
 public:
 int sumByD(vector<int> &nums, int div) {
     int n = nums.size(); //size of array
