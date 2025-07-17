@@ -1,4 +1,5 @@
 class Solution {
+
 public:
     vector<int> intersection(vector<int>& nums1, vector<int>& nums2) {
         // Step 1: Convert the first array into a set to remove duplicates
