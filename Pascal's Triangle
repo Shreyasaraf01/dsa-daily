@@ -1,0 +1,26 @@
+class Solution {
+public:
+    // Function to generate a single row of Pascal's Triangle
+    vector<int> generateRow(int rowNum) {
+        vector<int> row;
+        long long val = 1;
+        row.push_back(1); // First element is always 1
+
+        for (int col = 1; col < rowNum; col++) {
+            val = val * (rowNum - col); // Calculate the next value
+            val = val / col;
+            row.push_back(val);
+        }
+        return row;
+    }
+
+    // Function to generate the entire Pascal's Triangle
+    vector<vector<int>> generate(int numRows) {
+        vector<vector<int>> triangle;
+
+        for (int row = 1; row <= numRows; row++) {
+            triangle.push_back(generateRow(row)); // Add each row to the triangle
+        }
+        return triangle;
+    }
+};
