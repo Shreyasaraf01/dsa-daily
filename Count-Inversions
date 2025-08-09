@@ -1,5 +1,4 @@
 class Solution {
-
   public:
     int merge(vector<int> &arr, int low, int mid, int high) {
         vector<int> temp; // Temporary array
