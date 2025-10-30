@@ -1,0 +1,17 @@
+class Solution {
+public:
+    int removeDuplicates(vector<int>& nums) {
+        if (nums.empty()) return 0;  // Edge case
+
+        int i = 0; // slow pointer
+
+        for (int j = 1; j < nums.size(); j++) {
+            if (nums[j] != nums[i]) {
+                i++;              // move to next unique position
+                nums[i] = nums[j]; // place unique element
+            }
+        }
+
+        return i + 1; // number of unique elements
+    }
+};
